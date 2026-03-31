@@ -10,7 +10,7 @@ Purpose: equip the agent to emit concise, runnable Python that leverages **PySCF
 
 ## Inputs the agent should capture
 - Geometry in Å (list of `(element, (x, y, z))` tuples), charge, and spin (`mol.spin = 2S`).
-- Choice of basis/ECP suitable for lanthanides: e.g., `def2-TZVPP` + `def2-ECP`, `SARC-DKH-TZ`, or `ANO-RCC...` (use relativistic-consistent options; add diffuse functions for excited states).
+- Choice of basis/ECP suitable for lanthanides: e.g., `def2-TZVPP` + `def2-ECP`, `SARC-DKH-TZ`, or `ANO-RCC...` (use relativistically-consistent options; add diffuse functions for excited states).
 - Symmetry: enable when using CASSCF/DMRG (`symmetry=True`) to keep irreps well-labeled.
 - Active space hints: include the 4f shell (7 orbitals) and add 5d/6s as needed for 4f→5d excitations; set electron count per oxidation state.
 - Roots/state averaging: number of states and weights, especially for spin–orbit / crystal-field analyses.
@@ -81,7 +81,7 @@ atom = [
     ("Cl", (0.0, 0.0, -2.6)),
 ]
 
-mol, mf = build_scf(atom, charge=3, spin=1, basis="def2-TZVPP", ecp="def2-tzvpp")
+mol, mf = build_scf(atom, charge=3, spin=1, basis="def2-TZVPP", ecp="def2-TZVPP")
 mc = run_casscf(mf, ncas=12, nelecas=8, roots=3, weights=[0.34, 0.33, 0.33])
 e_nevpt2 = add_nevpt2(mc)
 print("SA-CASSCF energies:", mc.e_states)
