@@ -10,7 +10,7 @@ Purpose: equip the agent to emit concise, runnable Python that leverages **PySCF
 
 ## Inputs the agent should capture
 - Geometry in Å (list of `(element, (x, y, z))` tuples), charge, and spin (`mol.spin = 2S`).
-- Choice of basis/ECP suitable for lanthanides: e.g., `def2-TZVPP` + `def2-ECP`, `SARC-DKH-TZ`, or `ANO-RCC...` (pick relativistic sets: ECP-based like def2-ECP/def2-ecp, or scalar-relativistic all-electron like SARC-DKH; add diffuse functions for excited states).
+- Choice of basis/ECP suitable for lanthanides: e.g., `def2-TZVPP` + `def2-ecp`, `SARC-DKH-TZ`, or `ANO-RCC...` (pick relativistic sets: ECP-based like def2-ecp, or scalar-relativistic all-electron like SARC-DKH; add diffuse functions for excited states).
 - Symmetry: enable when using CASSCF/DMRG (`symmetry=True`) to keep irreps well-labeled.
 - Active space hints: include the 4f shell (7 orbitals) and add 5d/6s as needed for 4f→5d excitations; set electron count per oxidation state.
 - Roots/state averaging: number of states and weights, especially for spin–orbit / crystal-field analyses.
@@ -90,4 +90,4 @@ print("NEVPT2 correction:", e_nevpt2)
 
 ## When information is missing
 - Ask for: oxidation state (charge/spin), target states and multiplicities, chosen basis/ECP, and whether to use DMET vs direct CASSCF/DMRG.
-- If unspecified, default to ROHF + CASSCF + NEVPT2 with `def2-TZVPP/def2-ECP` and a 4f-only active space, noting assumptions in a brief leading comment.
+- If unspecified, default to ROHF + CASSCF + NEVPT2 with `def2-TZVPP/def2-ecp` and a 4f-only active space, noting assumptions in a brief leading comment.
