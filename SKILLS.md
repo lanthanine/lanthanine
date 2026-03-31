@@ -10,7 +10,7 @@ Purpose: equip the agent to emit concise, runnable Python that leverages **PySCF
 
 ## Inputs the agent should capture
 - Geometry in Å (list of `(element, (x, y, z))` tuples), charge, and spin (`mol.spin = 2S`).
-- Choice of basis/ECP suitable for lanthanides: e.g., `def2-TZVPP` + `def2-ECP`, `SARC-DKH-TZ`, or `ANO-RCC...` (use relativistic options; add diffuse functions for excited states).
+- Choice of basis/ECP suitable for lanthanides: e.g., `def2-TZVPP` + `def2-ECP`, `SARC-DKH-TZ`, or `ANO-RCC...` (pick relativistic sets: ECP-based like def2-ECP/def2-ecp, or scalar-relativistic all-electron like SARC-DKH; add diffuse functions for excited states).
 - Symmetry: enable when using CASSCF/DMRG (`symmetry=True`) to keep irreps well-labeled.
 - Active space hints: include the 4f shell (7 orbitals) and add 5d/6s as needed for 4f→5d excitations; set electron count per oxidation state.
 - Roots/state averaging: number of states and weights, especially for spin–orbit / crystal-field analyses.
@@ -21,7 +21,7 @@ Purpose: equip the agent to emit concise, runnable Python that leverages **PySCF
 ```python
 from pyscf import gto, scf
 
-def build_scf(atom, charge=0, spin=0, basis="def2-TZVPP", ecp="def2-ECP", symmetry=True):
+def build_scf(atom, charge=0, spin=0, basis="def2-TZVPP", ecp="def2-ecp", symmetry=True):
     mol = gto.Mole()
     mol.build(atom=atom, charge=charge, spin=spin, basis=basis, ecp=ecp,
               unit="Angstrom", symmetry=symmetry, verbose=4)
@@ -81,7 +81,7 @@ atom = [
     ("Cl", (0.0, 0.0, -2.6)),
 ]
 
-mol, mf = build_scf(atom, charge=3, spin=1, basis="def2-TZVPP", ecp="def2-ECP")
+mol, mf = build_scf(atom, charge=3, spin=1, basis="def2-TZVPP", ecp="def2-ecp")
 mc = run_casscf(mf, ncas=12, nelecas=8, roots=3, weights=[0.34, 0.33, 0.33])
 e_nevpt2 = add_nevpt2(mc)
 print("SA-CASSCF energies:", mc.e_states)
